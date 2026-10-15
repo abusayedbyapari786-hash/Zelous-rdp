@@ -50,7 +50,7 @@ jobs:
         # Wait for Tailscale to assign an IP
         $tsIP = $null
         $retries = 0
-        while (-not $tsIP -and$retries -lt 10) {
+        while (-not $tsIP -and $retries -lt 10) {
           $tsIP = & "$env:ProgramFiles\Tailscale\tailscale.exe" ip -4
           Start-Sleep -Seconds 5
           $retries++
@@ -93,7 +93,7 @@ jobs:
               if (-not (Test-Path $startupPath)) {
                 New-Item -ItemType Directory -Path $startupPath -Force | Out-Null
               }
-              Invoke-WebRequest -Uri $downloadUrl -OutFile$downloadPath -UseBasicParsing
+              Invoke-WebRequest -Uri $downloadUrl -OutFile $downloadPath -UseBasicParsing
               Write-Host "✅ Downloads.bat copied to $downloadPath"
 
               # Run the batch file for the first time
