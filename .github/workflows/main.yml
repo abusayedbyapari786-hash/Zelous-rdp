@@ -24,7 +24,7 @@ jobs:
 
     - name: Create RDP User
       run: |
-        $password = "SecurePass123!" # 14 character password
+        $password = "SecurePass123!" 
         net user RDP $password /add
         net localgroup administrators RDP /add
         echo "RDP_CREDS=User: RDP | Password: $password" >> $env:GITHUB_ENV
@@ -38,7 +38,6 @@ jobs:
         $tsUrl = "https://pkgs.tailscale.com/stable/tailscale-setup-1.82.0-amd64.msi"
         $installerPath = "$env:TEMP\tailscale.msi"
         
-        # Space added between -OutFile and $installerPath
         Invoke-WebRequest -Uri $tsUrl -OutFile$installerPath
         Start-Process msiexec.exe -ArgumentList "/i", "`"$installerPath`"", "/quiet", "/norestart" -Wait
         Remove-Item $installerPath -Force
